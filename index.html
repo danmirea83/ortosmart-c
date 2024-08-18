@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OrtoSmart - Management Pacienți</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <div class="headerContainer">
+            <img src="/public/images/ortosmart.jpeg" alt="OrtoSmart Logo" class="logo" />
+            <div>
+                <h1>OrtoSmart</h1>
+                <h2>Management of Patients, Orders, Products</h2>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="layoutContainer">
+            <!-- Meniul din stânga -->
+            <nav class="menuContainer">
+                <ul>
+                    <li><a href="#">Pacienți</a></li>
+                    <li><a href="#">Comenzi</a></li>
+                    <li><a href="#">Produse</a></li>
+                    <li><a href="#">Decizii</a></li>
+                    <li><a href="#">Tehnicieni</a></li>
+                    <li><a href="#">Anunțuri</a></li>
+                </ul>
+            </nav>
+
+            <!-- Secțiunea de conținut din dreapta -->
+            <div class="contentContainer">
+                <!-- Formular pentru adăugare/căutare pacienți -->
+                <div class="formContainer">
+                    <h3>Căutare Pacient</h3>
+                    <input type="text" id="searchInput" placeholder="Caută după nume sau CNP" onkeyup="filterTable()" />
+
+                    <table id="patientsTable">
+                        <thead>
+                            <tr>
+                                <th>Nume</th>
+                                <th>Prenume</th>
+                                <th>CNP</th>
+                                <th>Telefon</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Exemplu date -->
+                            <tr>
+                                <td>Popescu</td>
+                                <td>Ion</td>
+                                <td>1234567890123</td>
+                                <td>0712345678</td>
+                                <td>ion.popescu@example.com</td>
+                            </tr>
+                            <!-- Alte rânduri pot fi adăugate dinamic -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="formContainer">
+                    <h3>Adaugă Pacient</h3>
+                    <form id="addPatientForm">
+                        <label for="nume">Nume:</label>
+                        <input type="text" id="nume" name="nume" required>
+
+                        <label for="prenume">Prenume:</label>
+                        <input type="text" id="prenume" name="prenume" required>
+
+                        <label for="cnp">CNP:</label>
+                        <input type="text" id="cnp" name="cnp" required>
+
+                        <label for="telefon">Telefon:</label>
+                        <input type="text" id="telefon" name="telefon">
+
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email">
+
+                        <fieldset>
+                            <legend>Adresă</legend>
+                            <label for="judet">Județ:</label>
+                            <input type="text" id="judet" name="judet">
+
+                            <label for="localitate">Localitate:</label>
+                            <input type="text" id="localitate" name="localitate">
+
+                            <label for="strada">Stradă:</label>
+                            <input type="text" id="strada" name="strada">
+
+                            <label for="numar">Număr:</label>
+                            <input type="text" id="numar" name="numar">
+
+                            <label for="bloc">Bloc:</label>
+                            <input type="text" id="bloc" name="bloc">
+
+                            <label for="scara">Scară:</label>
+                            <input type="text" id="scara" name="scara">
+
+                            <label for="apartament">Apartament:</label>
+                            <input type="text" id="apartament" name="apartament">
+                        </fieldset>
+
+                        <button type="submit">Adaugă Pacient</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 OrtoSmart</p>
+    </footer>
+
+    <script>
+        function filterTable() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("searchInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("patientsTable");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 1; i < tr.length; i++) {
+                tr[i].style.display = "none";
+                td = tr[i].getElementsByTagName("td");
+                for (var j = 0; j < td.length; j++) {
+                    if (td[j]) {
+                        txtValue = td[j].textContent || td[j].innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
